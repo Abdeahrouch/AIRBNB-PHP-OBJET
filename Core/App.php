@@ -4,6 +4,7 @@ namespace Core;
 
 
 use MiladRahimi\PhpRouter\Router;
+use App\Controller\UserController;
 use App\Controller\AnnoncesController;
 use Core\Database\DatabaseConfigInterface;
 use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
@@ -13,7 +14,7 @@ class App implements DatabaseConfigInterface
 {
     //on va déclarer des constantes
     private const DB_HOST = 'database';
-    private const DB_NAME = 'site_mvc';
+    private const DB_NAME = 'tp-php-airbnb';
     private const DB_USER = 'admin';
     private const DB_PASS = 'admin';
     // on va crée une propriété qui va contenir l'instance sz notre classe
@@ -64,6 +65,10 @@ class App implements DatabaseConfigInterface
         $this->router->pattern('slug', '(\d+-)?[a-z]+(-[a-z\d]+)*');
         //On crée la route pour la page d'accueil avec la controlleur
         $this->router->get('/', [AnnoncesController::class, 'index']);
+        //route pour acceder a inscription
+        $this->router->get('/inscription', [UserController::class, 'inscription']);
+        //route pour acceder a login
+        $this->router->get('/login', [UserController::class, 'login']);
     }
 
     //3: Méthode startRouter (lancement du router)

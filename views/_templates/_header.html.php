@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title_tag) ? $title_tag : "Mon super site" ?></title>
+    <title><?php echo isset($title_tag) ? $title_tag : "t" ?></title>
 
 
     <!-- importer le cdn bootstrap -->
@@ -15,4 +15,12 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 
+
 <body>
+
+    <nav class="navbar bg-body-tertiary">
+        <form class="container-fluid justify-content-start">
+            <a class="btn btn-outline-success me-2" href="/inscription/">Inscription </a>
+            <a class="btn btn-sm btn-outline-secondary" href="/login/"> Se connecter</a>
+        </form>
+    </nav>
