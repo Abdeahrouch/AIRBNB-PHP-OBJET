@@ -14,6 +14,7 @@ class AnnoncesController extends Controller
         $data = [
             'title_tag' => 'AIRBNB',
             'h1_tag'  => 'ACCUEIL',
+            'annonces' => AppRepoManager::getRm()->getAnnoncesRepository()->findAll()
         ];
         $view = new View('annonces/index');
         $view->render($data);

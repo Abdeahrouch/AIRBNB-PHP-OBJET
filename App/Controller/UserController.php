@@ -18,7 +18,7 @@ class UserController extends Controller
         //On récupère la liste des utilisateurs
         //on reconstruit le tableau de données
         $view_data = [
-            'title_tag' => 'Dashboard',
+            'title_tag' => 'AIRBNB',
             'h1_tag' => 'Liste des utilisateurs'
         ];
 
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function login()
     {
         $view_data = [
-            'title_tag' => 'Dashboard',
+            'title_tag' => 'AIRBNB',
             'h1_tag' => 'Liste des utilisateurs'
         ];
 
