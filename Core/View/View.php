@@ -2,7 +2,7 @@
 
 namespace Core\View;
 
-use App\Controller\AuthController;
+use App\Controller\UserController;
 
 class View
 {
@@ -37,7 +37,7 @@ class View
     {
         //on check ici si l'utilisateur est en session 
         //sinon on redirige vers la page de connexion
-        $auth = AuthController::class;
+        $auth = UserController::class;
         
         if(!empty($view_data)){
             extract($view_data);

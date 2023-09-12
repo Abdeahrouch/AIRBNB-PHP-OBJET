@@ -20,17 +20,17 @@ abstract class Repository
 
     protected function readAll(string $class_name): array
     {
-        //on déclare un tableau vide
+        //je déclare un tableau vide
         $arr_result = [];
-        //on crée la requete
+        //je crée la requete
         $q = sprintf("SELECT * FROM %s", $this->getTableName());
-        //on éxecute la requete
+        //he éxecute la requete
         $stmt = $this->pdo->query($q);
-        // si la requete nest pas valide on retourn le tableau vide
+        // si la requete nest pas valide je retourn le tableau vide
         if (!$stmt) return $arr_result;
-        //on boucle sur les données de la requete
+        //la je  boucle sur les données de la requete
         while ($row_data = $stmt->fetch()) {
-            //on stocke dans $arr_result un nouvel objet de la classe $class_name
+            //je stocke dans $arr_result un nouvel objet de la classe $class_name
             $arr_result[] = new $class_name($row_data);
         }
         //:on retourne le tableau 
@@ -40,16 +40,16 @@ abstract class Repository
     protected function readById(string $class_name, int $id): ?Model
     {
 
-        //on crée la requete
+        //je crée la requete
         $q = sprintf("SELECT * FROM %s WHERE id = :id", $this->getTableName());
-        //on prépare la requete
+        //je prépare la requete
         $stmt = $this->pdo->prepare($q);
-        // si la requete nest pas valide on retourn le tableau vide
+        // si la requete nest pas valide je retourn le tableau vide
         if (!$stmt) return null;
 
         //on execute la requete
         $stmt->execute(['id' => $id]);
-        // on recupere les results
+        // je recupere les results
         $row_data = $stmt->fetch();
 
         return !empty($row_data) ? new $class_name($row_data) : null;

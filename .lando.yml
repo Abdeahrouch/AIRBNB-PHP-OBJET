@@ -1,4 +1,4 @@
-name: tp-php-objet-airbnb
+name: abdes-tp-airbnb
 recipe: lamp
 config:
   php: "8.2"
