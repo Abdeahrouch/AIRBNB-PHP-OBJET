@@ -1,9 +1,7 @@
 <h1><?= $h1_tag ?></h1>
-
 <div class="container">
     <div class="row">
         <?php foreach ($annonces as $annonce) : ?>
-            <?php var_dump($annonce); ?>
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-header">
@@ -11,8 +9,15 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?= $annonce->titre ?></h5>
-                        <!-- Ajout de l'image -->
-                        <img src="<?= $annonce->image_path ?>" alt="Image de l'annonce">
+
+                        <!-- Boucle pour afficher les images associées à l'annonce -->
+
+                        <img src="/img/<?= $photo->image_path ?>" alt="Image de l'annonce">
+
+
+
+
+
                         <p class="card-text">
                             <strong>Pays:</strong> <?= $annonce->pays ?><br>
                             <strong>Ville:</strong> <?= $annonce->ville ?><br>

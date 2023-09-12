@@ -12,6 +12,8 @@ class AppRepoManager
     //je declare une propriete qui va contenit l instance de ma classe
     private AnnoncesRepository $annoncesRepository;
 
+
+
     private UserRepository $userRepository;
 
 
@@ -25,7 +27,7 @@ class AppRepoManager
     {
         return $this->annoncesRepository;
     }
-    
+
 
     //je cree le getter de UserRepository
     public function getUserRepository(): UserRepository
@@ -42,7 +44,5 @@ class AppRepoManager
         $config = App::getApp();
         $this->annoncesRepository = new AnnoncesRepository($config);
         $this->userRepository = new UserRepository($config);
-
     }
-
 }

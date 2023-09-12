@@ -14,14 +14,11 @@
     <!--on link notre css-->
     <link rel="stylesheet" href="/style.css">
 
+    <link rel="icon" href="https://www.pngkit.com/png/detail/60-606032_airbnb-a-icon-vector-logo-airbnb-logo-vector.png" type="image/x-icon">
 </head>
 
 
 <body>
-<?php 
-
-?>
-
 
 
     <nav class="navbar bg-body-tertiary">
