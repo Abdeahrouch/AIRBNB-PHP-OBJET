@@ -25,5 +25,16 @@
         <form class="container-fluid justify-content-start">
             <a class="btn btn-outline-success me-2" href="/inscription/">Inscription </a>
             <a class="btn btn-sm btn-outline-secondary" href="/login/"> Se connecter</a>
+
         </form>
+
     </nav>
+    <?php if ($auth::isHote()) : ?>
+        <?php
+        $users = $_SESSION['USER'];
+        ?>
+        <a href="/logout" class="btn btn">Deconnexion</a>
+        <a href="//<?= $users->id ?>" class="btn btn">Mes biens</a>
+        </div>
+
+    <?php endif; ?>

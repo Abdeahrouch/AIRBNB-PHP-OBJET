@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Photos;
 use Core\Model\Model;
 
 class Annonces extends Model
@@ -17,4 +18,5 @@ class Annonces extends Model
     public string $description;
     public int $prix_par_nuit;
     public int $nbr_de_couchages;
+    public array $photo = [];
 }

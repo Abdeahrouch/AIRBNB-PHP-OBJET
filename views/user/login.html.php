@@ -1,23 +1,21 @@
-<?php
-
- if($auth::isAuth()) $auth::redirect('/'); ?>
-
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
+                    <?php
+                    if ($auth::isAuth()) $auth::redirect('/');
+                    ?>
                     <h3 class="text-center">Connexion</h3>
-                    <?php 
+                    <?php
                     if ($form_result && $form_result->hasError()) {
                         $errors = $form_result->getErrors();
                         if (!empty($errors)) {
-                            ?>
+                    ?>
                             <div>
                                 <?php echo $errors[0]->getMessage(); ?>
                             </div>
-                            <?php 
+                    <?php
                         }
                     }
                     ?>
@@ -32,6 +30,7 @@
                             <label for="password" class="form-label">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Se connecter</button>
                         </div>

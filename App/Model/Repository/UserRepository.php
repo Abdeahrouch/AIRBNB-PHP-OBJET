@@ -4,8 +4,7 @@ namespace App\Model\Repository;
 
 use App\Model\User;
 use Core\Repository\Repository;
-
-
+use DateTime;
 
 class UserRepository extends Repository
 {
@@ -81,43 +80,46 @@ class UserRepository extends Repository
         return $this->delete($id);
     }
 
-    //méthode pour créer un nouvel utilisateur
-    public function createUser(string $email, string $password, int $role)
+
+
+    public function createUser(string $email, string $password, int $is_hote, string $nom, string $prenom, DateTime $date_inscription)
     {
-        //on crée la requete d'insertion
-        $q_insert = sprintf(
-            'INSERT INTO `%s` (`email`, `password`, `role`) 
-            VALUES (:email, :password, :role)',
-            $this->getTableName()
-        );
-        //on crée une requete pour savoir si un utilisateur existe déjà
         $q_select = sprintf(
             'SELECT * FROM `%s` WHERE `email` = :email',
             $this->getTableName()
         );
-        //on prépare la requete select
+
         $stmt_select = $this->pdo->prepare($q_select);
-        //on verifie que la requete est bien préparée
+
         if (!$stmt_select) return false;
-        //on execute la requete select
+
         $stmt_select->execute([
             'email' => $email
         ]);
-        //on récupère les données
+
         $user_data = $stmt_select->fetch();
-        //si j'ai un resultat je retourne false
+
         if (!empty($user_data)) return false;
-        //sinon on prépare la requete d'insertion
+
+        $q_insert = sprintf(
+            'INSERT INTO `%s` (`password`, `is_hote`, `nom`, `prenom`, `date_inscription`, `email`) 
+        VALUES (:password, :is_hote, :nom, :prenom, :date_inscription, :email)',
+            $this->getTableName()
+        );
+
         $stmt_insert = $this->pdo->prepare($q_insert);
-        //on verifie que la requete est bien préparée
+
         if (!$stmt_insert) return false;
-        //on execute la requete d'insertion
+
         $stmt_insert->execute([
-            'email' => $email,
             'password' => $password,
-            'role' => $role
+            'is_hote' => $is_hote,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'date_inscription' => $date_inscription,
+            'email' => $email
         ]);
-        //on retourne true
+
         return true;
     }
 }

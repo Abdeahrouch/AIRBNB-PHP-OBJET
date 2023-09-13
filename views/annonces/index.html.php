@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <h1><?= $h1_tag ?></h1>
 <div class="container">
     <div class="row">
@@ -10,13 +14,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $annonce->titre ?></h5>
 
-                        <!-- Boucle pour afficher les images associées à l'annonce -->
 
-                        <img src="/img/<?= $photo->image_path ?>" alt="Image de l'annonce">
-
-
-
-
+                        <img src="/img/<?= $annonce->photo[0]->image_path ?>" alt="Image de l'annonce">
 
                         <p class="card-text">
                             <strong>Pays:</strong> <?= $annonce->pays ?><br>
@@ -29,6 +28,7 @@
                             <strong>Prix par nuit:</strong> <?= $annonce->prix_par_nuit ?> €<br>
                             <strong>Nombre de couchages:</strong> <?= $annonce->nbr_de_couchages ?><br>
                         </p>
+                        <a href="/detail/<?= $annonce->id ?>" class="btn btn-primary">Voir détail</a>
                     </div>
                 </div>
             </div>
