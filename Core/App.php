@@ -75,6 +75,10 @@ class App implements DatabaseConfigInterface
         $this->router->get('/logout', [UserController::class, 'logout']);
 
         $this->router->post('/inscription', [UserController::class, 'add']);
+
+        $this->router->get('/detail/{id}', [AnnoncesController::class, 'detailAnnonce']);
+
+        $this->router->get('/bien', [AnnoncesController::class, 'addBien']);
     }
 
     //3: Méthode startRouter (lancement du router)

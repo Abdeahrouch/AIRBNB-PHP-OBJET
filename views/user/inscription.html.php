@@ -1,5 +1,18 @@
 <div class="container mt-5">
     <h2>Formulaire d'inscription</h2>
+
+    <?php
+    if ($form_result && $form_result->hasError()) {
+        $errors = $form_result->getErrors();
+        if (!empty($errors)) {
+    ?>
+            <div>
+                <?php echo $errors[0]->getMessage(); ?>
+            </div>
+    <?php
+        }
+    }
+    ?>
     <form action="/inscription" method="post">
         <div class="form-group">
             <label for="nom">Nom :</label>
@@ -20,7 +33,7 @@
         <div class="form-group">
             <label for="is_hote">Êtes-vous un hôte ?</label>
             <select class="form-control" id="is_hote" name="is_hote" required>
-                <option value="1">Oui</option>
+                <option value="1" selected>Oui</option>
                 <option value="0">Non</option>
             </select>
         </div>

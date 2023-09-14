@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title_tag) ? $title_tag : "AIRBNB" ?></title>
+    <title><?php
+
+            use Core\Session\Session;
+
+            echo isset($title_tag) ? $title_tag : "AIRBNB" ?></title>
 
 
     <!-- importer le cdn bootstrap -->
@@ -21,20 +25,23 @@
 <body>
 
 
-    <nav class="navbar bg-body-tertiary">
-        <form class="container-fluid justify-content-start">
-            <a class="btn btn-outline-success me-2" href="/inscription/">Inscription </a>
-            <a class="btn btn-sm btn-outline-secondary" href="/login/"> Se connecter</a>
 
-        </form>
 
-    </nav>
-    <?php if ($auth::isHote()) : ?>
-        <?php
-        $users = $_SESSION['USER'];
-        ?>
-        <a href="/logout" class="btn btn">Deconnexion</a>
-        <a href="//<?= $users->id ?>" class="btn btn">Mes biens</a>
-        </div>
+    <?php
+    $is_hote = Session::get(Session::USER);
+    ?>
+    <div>
+        <nav class="navbar bg-body-tertiary">
+            <form class="container-fluid justify-content-start">
+                <?php if ($is_hote) : ?>
+                    <a href="/logout" class="btn btn">Déconnexion</a>
+                    <a href="/bien" class="btn btn">Mes biens</a>
+                    <a href="/bien" class="btn btn">Ajouter un bien</a>
+                <?php else : ?>
+                    <a class="btn btn-outline-success me-2" href="/inscription/">Inscription</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/login/">Se connecter</a>
+                <?php endif; ?>
+            </form>
+        </nav>
 
-    <?php endif; ?>
+    </div>

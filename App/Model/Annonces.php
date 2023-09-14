@@ -18,5 +18,7 @@ class Annonces extends Model
     public string $description;
     public int $prix_par_nuit;
     public int $nbr_de_couchages;
+
     public array $photo = [];
+    public array $equipements = [];
 }

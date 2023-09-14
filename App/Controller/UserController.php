@@ -106,21 +106,7 @@ class UserController extends Controller
         return !is_null(Session::get(Session::USER));
     }
 
-    public static function isHote(): bool
 
-    {
-
-        if (!self::isUser()) {
-
-            return false;
-        }
-
-
-
-        $user = Session::get(Session::USER);
-
-        return !is_null($user) && $user->is_hote == 1;
-    }
 
 
     //méthode de déconnexion
@@ -137,13 +123,20 @@ class UserController extends Controller
     {
 
         $post_data = $request->getParsedBody();
+
         $form_result = new FormResult();
 
-        if (empty($post_data['email']) || empty($post_data['password']) || empty($post_data['is_hote']) || empty($post_data['nom']) || empty($post_data['prenom']) || empty($post_data['date_inscription'])) {
+        if (
+            empty($post_data['email']) ||
+            empty($post_data['password']) ||
+            empty($post_data['nom']) ||
+            empty($post_data['prenom'])
+        ) {
             $form_result->addError(new FormError('Tous les champs sont obligatoires'));
             Session::set(Session::FORM_RESULT, $form_result);
             self::redirect('/inscription');
         } else {
+
             // On récupère les données du formulaire
             $email = htmlspecialchars(trim(strtolower($post_data['email'])));
             $password = htmlspecialchars(trim($post_data['password']));
@@ -151,10 +144,11 @@ class UserController extends Controller
             $is_hote = intval($post_data['is_hote']);
             $nom = htmlspecialchars(trim($post_data['nom']));
             $prenom = htmlspecialchars(trim($post_data['prenom']));
-            $date_inscription = htmlspecialchars(trim($post_data['date_inscription']));
+
 
             // On crée un nouvel utilisateur
-            $user = AppRepoManager::getRm()->getUserRepo()->createUser($email, $pass_hash, $is_hote, $nom, $prenom, $date_inscription);
+
+            $user = AppRepoManager::getRm()->getUserRepository()->createUser($email, $pass_hash, $is_hote, $nom, $prenom);
 
             // Si l'utilisateur n'est pas créé, on renvoie un message d'erreur
             if (!$user) {
@@ -164,6 +158,7 @@ class UserController extends Controller
             } else {
                 // Sinon, on redirige vers la page admin
                 Session::remove(Session::FORM_RESULT);
+                Session::set(Session::USER, $user);
                 self::redirect('/');
             }
         }

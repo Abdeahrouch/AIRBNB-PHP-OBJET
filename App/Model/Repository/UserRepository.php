@@ -82,8 +82,9 @@ class UserRepository extends Repository
 
 
 
-    public function createUser(string $email, string $password, int $is_hote, string $nom, string $prenom, DateTime $date_inscription)
+    public function createUser(string $email, string $password, int $is_hote, string $nom, string $prenom)
     {
+        $date_inscription = time();
         $q_select = sprintf(
             'SELECT * FROM `%s` WHERE `email` = :email',
             $this->getTableName()
@@ -91,7 +92,7 @@ class UserRepository extends Repository
 
         $stmt_select = $this->pdo->prepare($q_select);
 
-        if (!$stmt_select) return false;
+        if (!$stmt_select) return null;
 
         $stmt_select->execute([
             'email' => $email
@@ -99,7 +100,7 @@ class UserRepository extends Repository
 
         $user_data = $stmt_select->fetch();
 
-        if (!empty($user_data)) return false;
+        if (!empty($user_data)) return null;
 
         $q_insert = sprintf(
             'INSERT INTO `%s` (`password`, `is_hote`, `nom`, `prenom`, `date_inscription`, `email`) 
@@ -109,7 +110,7 @@ class UserRepository extends Repository
 
         $stmt_insert = $this->pdo->prepare($q_insert);
 
-        if (!$stmt_insert) return false;
+        if (!$stmt_insert) return null;
 
         $stmt_insert->execute([
             'password' => $password,
@@ -120,6 +121,23 @@ class UserRepository extends Repository
             'email' => $email
         ]);
 
-        return true;
+        $user_id = $this->pdo->lastInsertId();
+
+        $select_user = sprintf(
+            'SELECT * FROM `%s` WHERE `id` = :id',
+            $this->getTableName()
+        );
+
+        $stmt_user = $this->pdo->prepare($select_user);
+
+        if (!$stmt_user) return null;
+
+        $stmt_user->execute([
+            'id' => $user_id
+        ]);
+
+        $user = $stmt_user->fetch();
+
+        return empty($user) ? null : new User($user);
     }
 }
