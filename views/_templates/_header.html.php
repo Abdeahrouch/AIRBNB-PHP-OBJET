@@ -34,10 +34,13 @@
         <nav class="navbar bg-body-tertiary">
             <form class="container-fluid justify-content-start">
                 <?php if ($is_hote) : ?>
+                    <a href="/" class="btn btn">Retour à l'accueil</a>
                     <a href="/logout" class="btn btn">Déconnexion</a>
                     <a href="/bien" class="btn btn">Mes biens</a>
                     <a href="/bien" class="btn btn">Ajouter un bien</a>
+
                 <?php else : ?>
+                    <a href="/" class="btn btn">Retour à l'accueil</a>
                     <a class="btn btn-outline-success me-2" href="/inscription/">Inscription</a>
                     <a class="btn btn-sm btn-outline-secondary" href="/login/">Se connecter</a>
                 <?php endif; ?>

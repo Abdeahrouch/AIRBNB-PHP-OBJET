@@ -88,7 +88,26 @@ class AnnoncesRepository extends Repository
 
         $typeDeLogement = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        var_dump($typeDeLogement);
         return $typeDeLogement;
+    }
+
+
+
+    public function getCreationAnnonce(array $data)
+    {
+
+        $requete_add_annonce = sprintf(
+            'INSERT INTO `annonces` (`user_id`, `titre`, `pays`, `ville`, `adresse`, `type_de_logement_id`, `taile`, `nbr_de_pieces`, `description`, `prix_par_nuit`, `nbr_de_couchages`) 
+            VALUES (:user_id, :titre, :pays, :ville, :adresse, :type_de_logement_id, :taile, :nbr_de_pieces, :description, :prix_par_nuit, :nbr_de_couchages)'
+        );
+
+        $stmt = $this->pdo->prepare($requete_add_annonce);
+
+        if (!$stmt) {
+            return false;
+        }
+
+
+        $stmt->execute($data);
     }
 }

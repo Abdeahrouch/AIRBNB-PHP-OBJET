@@ -79,6 +79,9 @@ class App implements DatabaseConfigInterface
         $this->router->get('/detail/{id}', [AnnoncesController::class, 'detailAnnonce']);
 
         $this->router->get('/bien', [AnnoncesController::class, 'addBien']);
+
+
+        $this->router->post('/ajoutBien', [AnnoncesController::class, 'addAnnonces']);
     }
 
     //3: Méthode startRouter (lancement du router)

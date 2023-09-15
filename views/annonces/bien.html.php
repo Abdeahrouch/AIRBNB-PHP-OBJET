@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <h1>Ajouter un bien</h1>
 
-    <form action="/bien" method="POST">
+    <form action="/ajoutBien" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="titre" class="form-label">Titre</label>
             <input type="text" class="form-control" id="titre" name="titre" required>
@@ -45,6 +45,10 @@
         <div class="mb-3">
             <label for="nbr_de_couchages" class="form-label">Nombre de couchages</label>
             <input type="number" class="form-control" id="nbr_de_couchages" name="nbr_de_couchages" required>
+        </div>
+        <div>
+            <input type="file" name="images" id="images">
+
         </div>
         <button type="submit" class="btn btn-primary">Ajouter le bien</button>
     </form>

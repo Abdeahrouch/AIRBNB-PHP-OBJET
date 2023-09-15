@@ -18,7 +18,7 @@ class PhotoRepository extends Repository
     public function getPhotos($id)
     {
 
-
+        $images = [];
         $q = sprintf('SELECT * FROM %s WHERE annonces_id = :id', $this->getTableName());
 
         $stmt = $this->pdo->prepare($q);
