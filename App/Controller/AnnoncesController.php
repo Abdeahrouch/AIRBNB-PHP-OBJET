@@ -8,6 +8,7 @@ use Core\Form\FormResult;
 use Core\Session\Session;
 use Core\Controller\Controller;
 use App\Model\AnnoncesEquipement;
+use App\Model\Photos;
 use Core\Repository\AppRepoManager;
 use Laminas\Diactoros\ServerRequest;
 
@@ -91,7 +92,7 @@ class AnnoncesController extends Controller
         ) {
             $form_result->addError(new FormError('Veuillez remplir tous les champs'));
         } else {
-            
+
             $user_id = $user;
             $titre = htmlspecialchars(trim($post_data['titre']));
             $pays = htmlspecialchars(trim($post_data['pays']));
@@ -124,7 +125,11 @@ class AnnoncesController extends Controller
             ];
 
             if (move_uploaded_file($imgTmpPath, $imgPathPublic)) {
-                AppRepoManager::getRm()->getAnnoncesRepository()->getCreationAnnonce($data);
+                $annonces = AppRepoManager::getRm()->getAnnoncesRepository()->getCreationAnnonce($data);
+                $photo = new Photos();
+                $photo->image_path = $image_data['name'];
+                $photo->annonces_id = $annonces->id;
+                AppRepoManager::getRm()->getPhotosRepository()->createPhoto($photo);
             } else {
                 $form_result->addError(new FormError('Erreur lors de l\'upload de l\'image'));
             }
@@ -162,4 +167,3 @@ class AnnoncesController extends Controller
     {
     }
 }
-

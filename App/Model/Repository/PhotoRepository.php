@@ -32,4 +32,20 @@ class PhotoRepository extends Repository
         }
         return $images;
     }
+
+    public function createPhoto($photo)
+    {
+        $request = sprintf(
+            "INSERT INTO %s (image_path, annonces_id) VALUES (:image_path, :annonces_id)",
+            $this->getTableName()
+        );
+
+        $stmt = $this->pdo->prepare($request);
+
+        $stmt->execute([
+            'image_path' => $photo->image_path,
+            'annonces_id' => $photo->annonces_id
+        ]);
+        return null;
+    }
 }

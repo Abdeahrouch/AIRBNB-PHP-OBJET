@@ -2,6 +2,7 @@
 
 ?>
 
+
 <div class="text-center">
     <h1 class="text-pink"> <?= $h1_tag ?></h1>
 </div>

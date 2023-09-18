@@ -110,6 +110,8 @@ class AnnoncesRepository extends Repository
         }
 
         $stmt->execute($data);
+
+        return $this->getAnnonceById($this->pdo->lastInsertId());
     }
 
     // Je récupère les annonces créées par un user
