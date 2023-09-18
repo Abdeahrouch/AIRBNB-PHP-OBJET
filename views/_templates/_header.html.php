@@ -8,7 +8,7 @@
 
             use Core\Session\Session;
 
-            echo isset($title_tag) ? $title_tag : "AIRBNB" ?></title>
+            echo isset($title_tag) ? $title_tag : "AIRBNB ABDESS" ?></title>
 
 
     <!-- importer le cdn bootstrap -->
@@ -36,7 +36,7 @@
                 <?php if ($is_hote) : ?>
                     <a href="/" class="btn btn">Retour à l'accueil</a>
                     <a href="/logout" class="btn btn">Déconnexion</a>
-                    <a href="/bien" class="btn btn">Mes biens</a>
+                    <a href="/mesAnnonces" class="btn btn">Mes biens</a>
                     <a href="/bien" class="btn btn">Ajouter un bien</a>
 
                 <?php else : ?>

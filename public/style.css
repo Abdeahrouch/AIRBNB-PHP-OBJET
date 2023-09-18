@@ -16,5 +16,19 @@ a{
     color: inherit;
 }
 
+.text-pink {
+    color: palevioletred;
+}
+
+
+#btn-reserve {
+
+    background-color: pink; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+}
+
 
 

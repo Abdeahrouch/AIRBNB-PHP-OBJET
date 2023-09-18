@@ -36,7 +36,7 @@ class UserRepository extends Repository
         return empty($user_data) ? null : new User($user_data);
     }
 
-    //crée une méthode qui récupère la liste des utilisateurs
+    //creation une méthode qui récupère la liste des utilisateurs
     public function findAll(): array
     {
         return $this->readAll(User::class);

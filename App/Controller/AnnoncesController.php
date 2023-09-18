@@ -13,14 +13,14 @@ use Laminas\Diactoros\ServerRequest;
 
 class AnnoncesController extends Controller
 {
+    // méthode qui affiche la page d'accueil avec toutes les annonces.
     public function index()
     {
-        //tableau de données à envoyer à la vue
+        // Tableau de données à envoyer à la vue.
         $data = [
             'title_tag' => 'AIRBNB',
-            'h1_tag'  => 'ACCUEIL',
+            'h1_tag'  => 'ACCUEIL ABDES AIRBNB',
             'annonces' => AppRepoManager::getRm()->getAnnoncesRepository()->getAnnoncesByImage()
-
         ];
 
         $view = new View('annonces/index');
@@ -28,12 +28,10 @@ class AnnoncesController extends Controller
         $view->render($data);
     }
 
+    // Je cree la méthode qui affiche les détails d'une annonce.
     public function detailAnnonce($id)
     {
-
         $annonce = AppRepoManager::getRm()->getAnnoncesRepository()->getAnnonceById($id);
-
-
 
         $data = [
             'title_tag' => 'Détails de l\'annonce',
@@ -41,17 +39,13 @@ class AnnoncesController extends Controller
             'annonce' => $annonce
         ];
 
-
         $view = new View('annonces/detail');
         $view->render($data);
     }
 
-
+    // je cree  la méthode qui affiche le formulaire pour ajouter un bien.
     public function addBien()
     {
-
-
-
         $data = [
             'title_tag' => 'Ajouter un bien ',
             'h1_tag' => 'Ajouter un bien',
@@ -59,25 +53,22 @@ class AnnoncesController extends Controller
             'typedelogements' => AppRepoManager::getRm()->getAnnoncesRepository()->getTypeDeLogement()
         ];
 
-
         $view = new View('annonces/bien');
         $view->render($data);
     }
 
+    // Je cree une methode pour que l user puisse crees des  annonce.
     public function addAnnonces(ServerRequest $request)
     {
-
         $post_data = $request->getParsedBody();
         $user = $_SESSION['USER'];
 
         $user = $user->id;
 
-
         $image_data = $_FILES['images'];
         $form_result = new FormResult();
 
-
-        // Condition pour restreindre les types de fichiers image que vous souhaitez recevoir
+        // Condition pour restreindre les types de fichiers image 
         if (
             $image_data['type'] !== 'image/jpeg' &&
             $image_data['type'] !== 'image/png' &&
@@ -86,7 +77,7 @@ class AnnoncesController extends Controller
         ) {
             $form_result->addError(new FormError('Le format de l\'image n\'est pas valide'));
         } else if (
-            // Vérifiez si d'autres champs requis sont vides
+            //verification de si champs sont vides
             empty($post_data['titre']) ||
             empty($post_data['pays']) ||
             empty($post_data['ville']) ||
@@ -100,8 +91,7 @@ class AnnoncesController extends Controller
         ) {
             $form_result->addError(new FormError('Veuillez remplir tous les champs'));
         } else {
-            // Traitez les données
-            // Nettoyez et validez les champs d'entrée
+            
             $user_id = $user;
             $titre = htmlspecialchars(trim($post_data['titre']));
             $pays = htmlspecialchars(trim($post_data['pays']));
@@ -114,7 +104,7 @@ class AnnoncesController extends Controller
             $prix_par_nuit = floatval($post_data['prix_par_nuit']);
             $nbr_de_couchages = intval($post_data['nbr_de_couchages']);
 
-            // Gérez le téléchargement de l'image
+            // mecanique pour grer le telechargment des images
             $imgTmpPath = $image_data['tmp_name'];
             $filename = uniqid() . '_' . $image_data['name'];
             $imgPathPublic = PATH_ROOT . '/public/img/' . $filename;
@@ -133,7 +123,6 @@ class AnnoncesController extends Controller
                 'nbr_de_couchages' => $nbr_de_couchages,
             ];
 
-
             if (move_uploaded_file($imgTmpPath, $imgPathPublic)) {
                 AppRepoManager::getRm()->getAnnoncesRepository()->getCreationAnnonce($data);
             } else {
@@ -146,11 +135,31 @@ class AnnoncesController extends Controller
             self::redirect('/annonces/ajoutBien');
         }
 
-        // En cas de réussite, supprimez le résultat du formulaire de la session et redirigez vers la page d'administration
         Session::remove(Session::FORM_RESULT);
         self::redirect('/');
+    }
 
-        var_dump($data);
-        die();
+    // Je cree la méthode por afficher les annonces créées par l'utilisateur qui est connecté.
+    public function mesAnnonces()
+    {
+        $user = $_SESSION['USER'];
+        $user_id = $user->id;
+
+        $mesAnnonces = AppRepoManager::getRm()->getAnnoncesRepository()->getMesAnnonces($user_id);
+
+        $data = [
+            'title_tag' => 'Mes biens',
+            'h1_tag' => 'Mes biens',
+            'mesAnnonces' => $mesAnnonces,
+        ];
+
+        $view = new View('annonces/mesAnnonces');
+        $view->render($data);
+    }
+
+    // Je ccree la méthode pour suprimer une annonce
+    public function deleteAnnonce()
+    {
     }
 }
+

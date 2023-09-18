@@ -2,7 +2,10 @@
 
 ?>
 
-<h1><?= $h1_tag ?></h1>
+<div class="text-center">
+    <h1 class="text-pink"> <?= $h1_tag ?></h1>
+</div>
+
 <div class="container">
     <div class="row">
         <?php foreach ($annonces as $annonce) : ?>

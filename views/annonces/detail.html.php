@@ -2,7 +2,6 @@
     <h1><?= isset($h1_tag) ? htmlspecialchars($h1_tag) : 'Titre non défini' ?></h1>
     <div class="row">
         <div class="col-md-4">
-            <!-- Mettez l'image ici -->
             <img src="/img/<?= htmlspecialchars($annonce->photo[0]->image_path) ?>" alt="Image de l'annonce">
         </div>
         <div class="col-md-8">
@@ -34,7 +33,8 @@
                             <label for="checkout">Date de départ :</label>
                             <input type="date" id="checkout" name="checkout" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Réserver</button>
+                        <button type="submit" class="btn btn-primary" id="btn-reserve">Réserver</button>
+                        
                     </form>
                 </div>
             </div>
