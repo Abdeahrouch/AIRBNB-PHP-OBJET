@@ -16,7 +16,7 @@
     <!-- importer le cdn bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!--on link notre css-->
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">  
 
     <link rel="icon" href="https://www.pngkit.com/png/detail/60-606032_airbnb-a-icon-vector-logo-airbnb-logo-vector.png" type="image/x-icon">
 </head>

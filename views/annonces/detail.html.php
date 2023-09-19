@@ -33,7 +33,8 @@
                             <label for="checkout">Date de départ :</label>
                             <input type="date" id="checkout" name="checkout" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="btn-reserve">Réserver</button>
+                        <button type="submit" class="btn btn-pink" id="btn-reserver">Réserver</button>
+
                         
                     </form>
                 </div>

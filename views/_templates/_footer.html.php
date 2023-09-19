@@ -4,6 +4,8 @@
 
 </html>
 
-<footer>
-
+<footer class="footer-class">
+        <div class="container">
+            <p>&copy; Abdes Airbnb. Tous droits réservés.</p>
+        </div>
 </footer>

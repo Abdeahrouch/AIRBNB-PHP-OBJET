@@ -2,7 +2,6 @@
 
 ?>
 
-
 <div class="text-center">
     <h1 class="text-pink"> <?= $h1_tag ?></h1>
 </div>
@@ -17,8 +16,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $annonce->titre ?></h5>
 
-
-                        <img src="/img/<?= $annonce->photo[0]->image_path ?>" alt="Image de l'annonce">
+                        <img class="img-fluid" src="/img/<?= $annonce->photo[0]->image_path ?>" alt="Image de l'annonce">
 
                         <p class="card-text">
                             <strong>Pays:</strong> <?= $annonce->pays ?><br>

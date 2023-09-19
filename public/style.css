@@ -20,8 +20,7 @@ a{
     color: palevioletred;
 }
 
-
-#btn-reserve {
+.btn-primary {
 
     background-color: pink; 
     color: white; 
@@ -30,5 +29,13 @@ a{
     border-radius: 5px; 
 }
 
+#btn-reserver {
 
+
+    background-color: pink; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+}
 
